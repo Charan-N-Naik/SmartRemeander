@@ -4,44 +4,46 @@
     <meta charset="UTF-8">
     <title>All Reminders</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- ... (head and script remain, but update the row generation) -->
-<script>
-    fetch('/all')
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.querySelector('tbody');
-            tbody.innerHTML = '';
-            if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5">No reminders found.</td></tr>';
-            } else {
-                data.forEach(item => {
-                    const row = `<tr>
-                        <td>${item.index}</td>
-                        <td>${item.dateTime}</td>
-                        <td>${item.activity}</td>
-                        <td>${item.email}</td>
-                        <td>
-                            <form action="/delete/${item.index}" method="POST" style="display:inline;">
-                                <button type="submit" class="delete">Delete</button>
-                            </form>
-                            <a href="/update/${item.index}"><button class="update">Update</button></a>
-                        </td>
-                    </tr>`;
-                    tbody.innerHTML += row;
-                });
-            }
-        })
-        .catch(error => {
-            document.querySelector('tbody').innerHTML = '<tr><td colspan="5">Error loading reminders.</td></tr>';
-            console.error('Error:', error);
-        });
-</script>
-
+    <script>
+        // Fetch and render all reminders dynamically
+        fetch('/all')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5">No reminders found.</td></tr>';
+                } else {
+                    data.forEach(item => {
+                        const row = `<tr>
+                            <td>${item.index}</td>
+                            <td>${item.dateTime}</td>
+                            <td>${item.activity}</td>
+                            <td>${item.email}</td>
+                            <td>
+                                <form action="/delete/${item.index}" method="POST" style="display:inline;">
+                                    <button type="submit" class="delete">Delete</button>
+                                </form>
+                                <a href="/update/${item.index}"><button class="update">Update</button></a>
+                            </td>
+                        </tr>`;
+                        tbody.innerHTML += row;
+                    });
+                }
+            })
+            .catch(error => {
+                document.querySelector('tbody').innerHTML = '<tr><td colspan="5">Error loading reminders.</td></tr>';
+                console.error('Error:', error);
+            });
+    </script>
 </head>
 <body>
-    <div class="show-container">
+    <nav class="navbar">
         <h1>All Reminders</h1>
-        <a href="/"><button class="back-btn">Back to Home</button></a>
+        <a href="/" class="nav-link">Return to Home</a>
+    </nav>
+    
+    <div class="show-container">
         <table>
             <thead>
                 <tr>
@@ -57,5 +59,9 @@
             </tbody>
         </table>
     </div>
+    
+    <footer class="footer">
+        <p>&copy; 2023 Smart Reminder Bot. All rights reserved.</p>
+    </footer>
 </body>
 </html>
