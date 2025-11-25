@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Reminder Bot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Smart Reminder Bot</h1>
+        <a href="/show" class="nav-link">View All Reminders</a>
+    </nav>
+    
+    <div class="form-container">
+        <form id="reminderForm">
+            <div class="row">
+                <div class="col">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="col">
+                    <label for="time">Time:</label>
+                    <input type="time" id="time" required>
+                </div>
+            </div>
+            
+            <label for="task">What Work to Remind:</label>
+            <textarea id="task" rows="3" placeholder="Describe the task" required></textarea>
+            
+            <div class="row">
+                <div class="col">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="col">
+                    <button type="submit" id="submitBtn" class="small-btn">Submit</button>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading"></div>
+            <div class="success" id="success">✓</div>
+        </form>
+        
+        <h3>Recent Reminders</h3>
+        <div id="recent-reminders">
+            <p>Loading...</p>
+        </div>
+        
+        <h3>Upload Monthly/Weekly Data</h3>
+        <form id="uploadForm" enctype="multipart/form-data" action="/upload" method="POST">
+            <input type="file" name="file" accept=".xlsx" required>
+            <button type="submit">Upload and Append to Excel</button>
+        </form>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2023 Smart Reminder Bot. All rights reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
